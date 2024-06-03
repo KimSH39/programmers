@@ -1,0 +1,17 @@
+WITH Rare_Items AS (
+    SELECT ITEM_ID
+    FROM ITEM_INFO
+    WHERE RARITY = 'RARE'
+)
+SELECT 
+    it.ITEM_ID, 
+    it.ITEM_NAME, 
+    it.RARITY
+FROM 
+    ITEM_TREE t
+JOIN 
+    Rare_Items r ON t.PARENT_ITEM_ID = r.ITEM_ID
+JOIN 
+    ITEM_INFO it ON t.ITEM_ID = it.ITEM_ID
+ORDER BY 
+    it.ITEM_ID DESC;
